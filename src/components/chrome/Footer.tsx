@@ -26,7 +26,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
           {/* Brand column */}
           <div className="md:col-span-2">
-            <Link href="/" onClick={() => window.scrollTo(0, 0)} className="group inline-flex items-center gap-3">
+            <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="group inline-flex items-center gap-3">
               <Logomark variant="footer" />
               <span className="font-display text-[12px] uppercase tracking-[0.4em] text-parchment/65">
                 Hazem Elerefy
@@ -61,7 +61,7 @@ export function Footer() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    onClick={() => window.scrollTo(0, 0)}
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     className="font-heading text-sm text-parchment/55 transition-colors hover:text-candle"
                   >
                     {l.label}

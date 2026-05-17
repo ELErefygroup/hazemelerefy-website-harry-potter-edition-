@@ -84,7 +84,7 @@ export function MobileNav({
       <button
         type="button"
         aria-label="Close menu"
-        onClick={() => { window.scrollTo(0, 0); onClose(); }}
+        onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); onClose(); }}
         tabIndex={-1}
         className={cn(
           "absolute inset-0 bg-void/85 backdrop-blur-sm transition-opacity duration-300",

@@ -53,7 +53,7 @@ export function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8">
         <Link
           href="/"
-          onClick={() => window.scrollTo(0, 0)}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Home"
           className="group inline-flex items-center gap-3"
         >
@@ -71,7 +71,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              onClick={() => window.scrollTo(0, 0)}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               aria-current={isActive(link.href) ? "page" : undefined}
               title={link.whisper}
               className={cn(
