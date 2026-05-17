@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { cn } from "@/lib/cn";
 import { SpellbookIcon, CrestIcon, QuillIcon } from "@/components/icons/HpIcons";
@@ -26,26 +27,24 @@ export function HomeHero() {
       aria-labelledby="home-hero-title"
       className="relative isolate overflow-hidden pt-32 pb-20 md:pt-40 md:pb-24"
     >
-      {/* Background video */}
+      {/* Background video & prioritized poster image */}
       <div className="absolute inset-0 -z-10">
-        {reduced ? (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            src="/images/portfolio-hero-poster.jpg"
-            alt=""
-            aria-hidden="true"
-            className="h-full w-full object-cover"
-          />
-        ) : (
+        <Image
+          src="/images/portfolio-hero-poster.jpg"
+          alt="Atmospheric hero background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        {!reduced && (
           <video
             autoPlay
             loop
             muted
             playsInline
             preload="metadata"
-            poster="/images/portfolio-hero-poster.jpg"
-            aria-hidden="true"
-            className="h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
           >
             <source src="/video/portfolio-hero.mp4" type="video/mp4" />
           </video>

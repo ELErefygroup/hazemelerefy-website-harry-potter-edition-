@@ -55,10 +55,11 @@ export function PortfolioGallery() {
 
         <div className="relative z-10 overflow-visible w-full">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {stage2PortfolioProjects.map((project) => (
+            {stage2PortfolioProjects.map((project, i) => (
               <ProjectCard
                 key={project.id}
                 project={project}
+                index={i}
                 liveRating={ratingsMap[project.ratingKey]}
                 onOpen={() => setActiveId(project.id)}
                 onRatingUpdate={handleRatingUpdate}
@@ -80,11 +81,13 @@ export function PortfolioGallery() {
 
 function ProjectCard({
   project,
+  index,
   liveRating,
   onOpen,
   onRatingUpdate,
 }: {
   project: Stage2PortfolioProject;
+  index: number;
   liveRating?: { totalVotes: number; average: number };
   onOpen: () => void;
   onRatingUpdate: (projectKey: string, totalVotes: number, average: number) => void;
@@ -218,6 +221,7 @@ function ProjectCard({
           src={project.image}
           alt={project.title}
           fill
+          priority={index < 3}
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           className="object-cover object-top transition-transform duration-[1200ms] ease-out group-hover:scale-110"
         />

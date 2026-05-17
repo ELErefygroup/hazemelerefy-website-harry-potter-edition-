@@ -41,7 +41,7 @@ export function FeaturedWork() {
         </header>
 
         <ul className="mt-14 grid grid-cols-1 gap-7 md:grid-cols-2">
-          {featured.map((p) => (
+          {featured.map((p, i) => (
             <li key={p.id}>
               <Link
                 href={`/portfolio#${p.id}`}
@@ -53,6 +53,7 @@ export function FeaturedWork() {
                     alt={p.title}
                     width={960}
                     height={540}
+                    priority={i < 2}
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />

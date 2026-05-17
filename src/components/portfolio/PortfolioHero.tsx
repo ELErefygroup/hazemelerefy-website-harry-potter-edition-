@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { ProfileFrameV2 } from "@/components/portfolio/ProfileFrameV2";
 import { OwlIcon, SpellbookIcon, CrestIcon, QuillIcon } from "@/components/icons/HpIcons";
@@ -58,27 +59,19 @@ export function PortfolioHero({
     >
       {/* Background banner */}
       <div className="absolute inset-0 -z-10">
-        {!reduced ? (
+        <Image src={poster} alt="Portfolio hero background" fill priority sizes="100vw" className="object-cover" />
+        {!reduced && (
           <video
             ref={videoRef}
             src={videoSrc}
-            poster={poster}
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
             onCanPlay={() => setCanPlay(true)}
-            className="h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
             aria-hidden="true"
-          />
-        ) : (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            src={poster}
-            alt=""
-            aria-hidden="true"
-            className="h-full w-full object-cover"
           />
         )}
         <div

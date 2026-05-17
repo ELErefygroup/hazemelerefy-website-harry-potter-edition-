@@ -308,7 +308,7 @@ function buildSpreads(projectStory: ProjectStory): Spread[] {
           <div class="archive-plate">
             <span class="plate-crest">castle archive of works</span>
             <div class="specimen-frame">
-              <img src="${coverImage}" alt="${title} interface preview">
+              <img src="${coverImage}" alt="${title} interface preview" loading="eager" fetchpriority="high">
             </div>
             <div class="plate-caption">
               <strong>${title}</strong>
@@ -1285,7 +1285,7 @@ export function MagicalBook({
 
                 <div className="cover-visual">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={projectStory.coverImage} alt={`${project.title} preview`} className="cover-visual-image" id="coverVisualImage" />
+                  <img src={projectStory.coverImage} alt={`${project.title} preview`} className="cover-visual-image" id="coverVisualImage" loading="eager" fetchPriority="high" />
                   <div className="cover-visual-glow" />
                 </div>
 
