@@ -24,14 +24,14 @@ const cards = [
     icon: CastleIcon,
   },
   {
-    id: "uiux",
-    title: "UI / UX Design",
+    id: "ai",
+    title: "AI & Intelligent Automation",
     blurb:
-      "Crafting intuitive, human-centred interfaces that balance striking aesthetics with frictionless user journeys.",
+      "Designing autonomous agents, custom deep learning models, and complex n8n workflows that breathe life into static processes.",
     bullets: [
-      "Comprehensive Design Systems",
-      "High-Fidelity Prototyping",
-      "Micro-interactions & Motion",
+      "Autonomous AI Agents",
+      "Advanced n8n Workflows",
+      "Applied Deep Learning",
     ],
     accent: "moon",
     icon: WandIcon,
