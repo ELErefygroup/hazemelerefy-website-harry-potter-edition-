@@ -1,0 +1,69 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="40" x2="1080" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(302 143) rotate(52.0631) scale(319.369 373.635)">
+      <stop stop-color="#22D3EE" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(910 437) rotate(121.621) scale(257.546 277.02)">
+      <stop stop-color="#D946EF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#D946EF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" rx="36" fill="url(#bg)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#glowA)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#glowB)"/>
+
+  <g opacity="0.9">
+    <rect x="70" y="72" width="72" height="72" rx="20" fill="url(#bg)" stroke="#22D3EE" stroke-opacity="0.35"/>
+    <path d="M96 122V94H116.5C126.5 94 132 99.5 132 107.5C132 116.5 126 122 115.5 122H96ZM108 112H115C118.5 112 121 110 121 107C121 104 118.5 102 115 102H108V112Z" fill="#E2E8F0"/>
+    <text x="160" y="102" fill="#E2E8F0" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="2">JOBPULSE</text>
+    <text x="160" y="138" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="20">Market intelligence cockpit</text>
+  </g>
+
+  <text x="72" y="244" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="700">
+    Track the labor market
+  </text>
+  <text x="72" y="308" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="700">
+    with data, not guesswork.
+  </text>
+  <text x="72" y="372" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="26">
+    Salary signals, role demand, skill momentum,
+  </text>
+  <text x="72" y="408" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="26">
+    and remote-work trends in one premium dashboard.
+  </text>
+
+  <g>
+    <rect x="700" y="88" width="428" height="456" rx="30" fill="#020617" fill-opacity="0.74" stroke="#FFFFFF" stroke-opacity="0.1"/>
+    <rect x="732" y="124" width="156" height="88" rx="22" fill="#0F172A" stroke="#FFFFFF" stroke-opacity="0.08"/>
+    <rect x="908" y="124" width="188" height="88" rx="22" fill="#0F172A" stroke="#FFFFFF" stroke-opacity="0.08"/>
+    <rect x="732" y="234" width="364" height="132" rx="26" fill="#0F172A" stroke="#FFFFFF" stroke-opacity="0.08"/>
+    <rect x="732" y="388" width="364" height="124" rx="26" fill="#0F172A" stroke="#FFFFFF" stroke-opacity="0.08"/>
+
+    <text x="758" y="154" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="16">Coverage</text>
+    <text x="758" y="190" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">36 postings</text>
+
+    <text x="934" y="154" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="16">Remote-friendly share</text>
+    <text x="934" y="190" fill="#E2E8F0" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">69%</text>
+
+    <text x="758" y="264" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="16">Monthly hiring trend</text>
+    <path d="M760 332C790 330 820 310 850 314C880 318 904 276 938 280C972 284 1000 246 1036 252L1070 224" stroke="#22D3EE" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="760" cy="332" r="6" fill="#22D3EE"/>
+    <circle cx="850" cy="314" r="6" fill="#22D3EE"/>
+    <circle cx="938" cy="280" r="6" fill="#22D3EE"/>
+    <circle cx="1036" cy="252" r="6" fill="#22D3EE"/>
+    <circle cx="1070" cy="224" r="6" fill="#22D3EE"/>
+
+    <text x="758" y="420" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="16">Top recurring skill</text>
+    <rect x="758" y="442" width="84" height="34" rx="17" fill="#22D3EE" fill-opacity="0.12" stroke="#22D3EE" stroke-opacity="0.28"/>
+    <text x="782" y="465" fill="#CFFAFE" font-family="Arial, Helvetica, sans-serif" font-size="15">SQL</text>
+    <rect x="854" y="442" width="100" height="34" rx="17" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.28"/>
+    <text x="881" y="465" fill="#D1FAE5" font-family="Arial, Helvetica, sans-serif" font-size="15">Python</text>
+    <rect x="966" y="442" width="108" height="34" rx="17" fill="#D946EF" fill-opacity="0.12" stroke="#D946EF" stroke-opacity="0.28"/>
+    <text x="994" y="465" fill="#F5D0FE" font-family="Arial, Helvetica, sans-serif" font-size="15">Power BI</text>
+  </g>
+</svg>

@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+/*
+ * Hogwarts-by-Night theme tokens, exposed to Tailwind v4 via @theme inline.
+ * The same values are duplicated in src/lib/tokens.ts for use from JS / GSAP.
+ */
+
+:root {
+  /* core night */
+  --color-void: #05070d;
+  --color-night: #0a0f1c;
+  --color-twilight: #13192a;
+  --color-stone: #1f2532;
+  --color-fog: #2a3146;
+
+  /* magic accents */
+  --color-candle: #e6b25e;
+  --color-ember: #c8853a;
+  --color-moon: #b8c5dc;
+  --color-parchment: #e8dbb8;
+  --color-parchment-deep: #c9b989;
+  --color-ink: #0b0a07;
+
+  /* house accents */
+  --color-gryffindor: #7a2128;
+  --color-slytherin: #1b5e3a;
+  --color-ravenclaw: #1f3a6b;
+  --color-hufflepuff: #d4af37;
+
+  /* glows */
+  --glow-candle: rgba(230, 178, 94, 0.45);
+  --glow-moon: rgba(184, 197, 220, 0.3);
+  --glow-ember: rgba(200, 133, 58, 0.4);
+
+  /* shadows */
+  --shadow-candle-sm: 0 0 18px rgba(230, 178, 94, 0.25);
+  --shadow-candle-md:
+    0 0 28px rgba(230, 178, 94, 0.3), 0 0 56px rgba(230, 178, 94, 0.12);
+  --shadow-candle-lg:
+    0 0 40px rgba(230, 178, 94, 0.45), 0 0 90px rgba(230, 178, 94, 0.18);
+  --shadow-surface-lg:
+    0 28px 60px -22px rgba(0, 0, 0, 0.85),
+    0 12px 28px -16px rgba(0, 0, 0, 0.7);
+  --shadow-inset:
+    inset 0 1px 0 rgba(230, 178, 94, 0.12),
+    inset 0 0 0 1px rgba(230, 178, 94, 0.06);
+}
+
+@theme inline {
+  --color-void: var(--color-void);
+  --color-night: var(--color-night);
+  --color-twilight: var(--color-twilight);
+  --color-stone: var(--color-stone);
+  --color-fog: var(--color-fog);
+
+  --color-candle: var(--color-candle);
+  --color-ember: var(--color-ember);
+  --color-moon: var(--color-moon);
+  --color-parchment: var(--color-parchment);
+  --color-parchment-deep: var(--color-parchment-deep);
+  --color-ink: var(--color-ink);
+
+  --color-gryffindor: var(--color-gryffindor);
+  --color-slytherin: var(--color-slytherin);
+  --color-ravenclaw: var(--color-ravenclaw);
+  --color-hufflepuff: var(--color-hufflepuff);
+
+  --color-background: var(--color-night);
+  --color-foreground: var(--color-parchment);
+
+  --font-display: var(--font-cinzel);
+  --font-heading: var(--font-cormorant);
+  --font-sans: var(--font-jakarta);
+}
+
+html,
+body {
+  background-color: var(--color-night);
+  color: var(--color-parchment);
+}
+
+body {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Subtle moonlight gradient overlay */
+  background-image:
+    radial-gradient(
+      900px 600px at 78% 6%,
+      rgba(184, 197, 220, 0.05),
+      transparent 60%
+    ),
+    radial-gradient(
+      720px 520px at 6% 28%,
+      rgba(230, 178, 94, 0.04),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #05070d 0%, #0a0f1c 40%, #13192a 100%);
+}
+
+::selection {
+  background: rgba(230, 178, 94, 0.35);
+  color: var(--color-parchment);
+}
+
+/* Themed focus ring — gilded outline */
+:focus-visible {
+  outline: 2px solid var(--color-candle);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Reduced motion: turn off long animations and heavy parallax */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Slow painterly drift — used by the profile portrait when motion is allowed */
+@keyframes painterly-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0) scale(1.012);
+  }
+}
+
+@keyframes candle-flicker {
+  0%,
+  100% {
+    opacity: 0.95;
+    filter: brightness(1);
+  }
+  20% {
+    opacity: 0.88;
+    filter: brightness(0.94);
+  }
+  45% {
+    opacity: 1;
+    filter: brightness(1.08);
+  }
+  70% {
+    opacity: 0.9;
+    filter: brightness(0.97);
+  }
+}
+
+@keyframes parchment-grain {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-1px, 1px, 0);
+  }
+}
+
+.bg-parchment-noise {
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(232, 219, 184, 0.06) 0,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(230, 178, 94, 0.05) 0,
+      transparent 35%
+    );
+}
+
+/* News-ticker / marquee for the skills bar — paused on hover, freezes on
+   reduced-motion via the global media-query reset above. */
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-left 38s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover,
+.group:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Floaty drift used by the hero stat cards — gentle Y/scale sway. */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+.animate-float-1 {
+  animation: float-soft 7s ease-in-out infinite;
+}
+.animate-float-2 {
+  animation: float-soft 9s ease-in-out infinite 1s;
+}
+.animate-float-3 {
+  animation: float-soft 8s ease-in-out infinite 2s;
+}
