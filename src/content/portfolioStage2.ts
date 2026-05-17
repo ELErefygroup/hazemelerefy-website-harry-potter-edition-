@@ -43,8 +43,8 @@ export const stage2PortfolioProjects: Stage2PortfolioProject[] = [
     color: "gold",
     ratingKey: "jobpulse",
     rating: {
-      totalVotes: 76,
-      average: 4.9,
+      totalVotes: 0,
+      average: 0,
     },
     focus: "career divination · market signals · product polish",
     story:
@@ -87,8 +87,8 @@ export const stage2PortfolioProjects: Stage2PortfolioProject[] = [
     color: "emerald",
     ratingKey: "healthcare",
     rating: {
-      totalVotes: 124,
-      average: 4.8,
+      totalVotes: 0,
+      average: 0,
     },
     focus: "healer operations · backlog visibility · calm triage",
     story:
@@ -131,8 +131,8 @@ export const stage2PortfolioProjects: Stage2PortfolioProject[] = [
     color: "silver",
     ratingKey: "kanban",
     rating: {
-      totalVotes: 58,
-      average: 4.8,
+      totalVotes: 0,
+      average: 0,
     },
     focus: "task flow · drag-and-drop spellwork · clean movement",
     story:
@@ -175,8 +175,8 @@ export const stage2PortfolioProjects: Stage2PortfolioProject[] = [
     color: "purple",
     ratingKey: "realestate",
     rating: {
-      totalVotes: 63,
-      average: 4.8,
+      totalVotes: 0,
+      average: 0,
     },
     focus: "search charms · listing comparison · calmer browsing",
     story:
@@ -219,8 +219,8 @@ export const stage2PortfolioProjects: Stage2PortfolioProject[] = [
     color: "sapphire",
     ratingKey: "global_sales",
     rating: {
-      totalVotes: 89,
-      average: 4.9,
+      totalVotes: 0,
+      average: 0,
     },
     focus: "merchant routes · margin tracking · regional signals",
     story:
@@ -263,8 +263,8 @@ export const stage2PortfolioProjects: Stage2PortfolioProject[] = [
     color: "ruby",
     ratingKey: "churn",
     rating: {
-      totalVotes: 64,
-      average: 4.7,
+      totalVotes: 0,
+      average: 0,
     },
     focus: "risk divination · retention insight · readable modeling",
     story:
@@ -307,8 +307,8 @@ export const stage2PortfolioProjects: Stage2PortfolioProject[] = [
     color: "obsidian",
     ratingKey: "ecommerce",
     rating: {
-      totalVotes: 245,
-      average: 4.9,
+      totalVotes: 0,
+      average: 0,
     },
     focus: "operator spellwork · activity tracking · admin clarity",
     story:

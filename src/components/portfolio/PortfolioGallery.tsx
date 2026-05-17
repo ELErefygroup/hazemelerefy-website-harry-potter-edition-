@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from "react";
+import { useState, useEffect, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from "react";
 import { MagicalBook } from "@/components/portfolio/MagicalBook";
 import { SpellbookIcon } from "@/components/icons/HpIcons";
 import {
@@ -9,9 +9,38 @@ import {
   type Stage2PortfolioProject,
 } from "@/content/portfolioStage2";
 import { cn } from "@/lib/cn";
+import { submitRating, fetchAllRatings } from "@/app/actions/rating";
+
+/** Generate or retrieve a persistent visitor ID for rating uniqueness */
+function getVisitorId(): string {
+  if (typeof window === "undefined") return "ssr";
+  let id = localStorage.getItem("hp_visitor_id");
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem("hp_visitor_id", id);
+  }
+  return id;
+}
 
 export function PortfolioGallery() {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [ratingsMap, setRatingsMap] = useState<Record<string, { totalVotes: number; average: number }>>({});
+
+  // Fetch live ratings from the database on mount
+  useEffect(() => {
+    fetchAllRatings().then((data) => {
+      if (data && Object.keys(data).length > 0) {
+        setRatingsMap(data);
+      }
+    });
+  }, []);
+
+  function handleRatingUpdate(projectKey: string, totalVotes: number, average: number) {
+    setRatingsMap((prev) => ({
+      ...prev,
+      [projectKey]: { totalVotes, average },
+    }));
+  }
 
   return (
     <section
@@ -30,7 +59,9 @@ export function PortfolioGallery() {
               <ProjectCard
                 key={project.id}
                 project={project}
+                liveRating={ratingsMap[project.ratingKey]}
                 onOpen={() => setActiveId(project.id)}
+                onRatingUpdate={handleRatingUpdate}
               />
             ))}
           </div>
@@ -49,15 +80,21 @@ export function PortfolioGallery() {
 
 function ProjectCard({
   project,
+  liveRating,
   onOpen,
+  onRatingUpdate,
 }: {
   project: Stage2PortfolioProject;
+  liveRating?: { totalVotes: number; average: number };
   onOpen: () => void;
+  onRatingUpdate: (projectKey: string, totalVotes: number, average: number) => void;
 }) {
   const [score, setScore] = useState(0);
   const [hoverScore, setHoverScore] = useState(0);
-  const [totalVotes, setTotalVotes] = useState(project.rating.totalVotes);
-  const [average, setAverage] = useState(project.rating.average);
+
+  // Use live data from database if available, otherwise fall back to static default
+  const totalVotes = liveRating?.totalVotes ?? project.rating.totalVotes;
+  const average = liveRating?.average ?? project.rating.average;
 
   const palette =
     project.color === "gold"
@@ -134,23 +171,15 @@ function ProjectCard({
     setHoverScore(score);
   }
 
-  function handleRate(nextScore: number) {
-    const currentAverage = average;
-
-    if (score === 0) {
-      const nextVotes = totalVotes + 1;
-      const nextAverage = ((currentAverage * totalVotes) + nextScore) / nextVotes;
-      setScore(nextScore);
-      setHoverScore(nextScore);
-      setTotalVotes(nextVotes);
-      setAverage(Number(nextAverage.toFixed(1)));
-      return;
-    }
-
-    const nextAverage = ((currentAverage * totalVotes) - score + nextScore) / totalVotes;
+  async function handleRate(nextScore: number) {
     setScore(nextScore);
     setHoverScore(nextScore);
-    setAverage(Number(nextAverage.toFixed(1)));
+
+    const visitorId = getVisitorId();
+    const result = await submitRating(project.ratingKey, nextScore, visitorId);
+    if (result.success && result.totalVotes !== undefined && result.average !== undefined) {
+      onRatingUpdate(project.ratingKey, result.totalVotes, result.average);
+    }
   }
 
   function handleCardKeyDown(event: ReactKeyboardEvent<HTMLElement>) {

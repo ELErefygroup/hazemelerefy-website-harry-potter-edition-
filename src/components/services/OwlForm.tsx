@@ -5,17 +5,11 @@ import { motion } from "framer-motion";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { site } from "@/lib/site";
 import { OwlIcon } from "@/components/icons/HpIcons";
+import { submitContactForm } from "@/app/actions/contact";
 
 /**
- * "Send the Owl" — service-request form. Posts directly to Web3Forms
- * from the client (no server route needed), which means no Vercel
- * function invocations are spent on each submission and the page stays
- * fully static. Free tier: 3000 submissions/month.
- *
- * Environment:
- *   NEXT_PUBLIC_WEB3FORMS_KEY — the Web3Forms access key. When unset,
- *   the form falls back to a `mailto:` link so visitors can still send
- *   their brief while the form-handler is being provisioned.
+ * "Send the Owl" — service-request form. 
+ * Refactored to use a Next.js Server Action to insert directly into Supabase.
  *
  * UX:
  *   - Honeypot field (`botcheck`) for low-effort spam.
@@ -25,50 +19,29 @@ import { OwlIcon } from "@/components/icons/HpIcons";
  */
 export function OwlForm() {
   const reduced = useReducedMotion();
-  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState<string>("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!accessKey) {
-      // No key configured — open the visitor's mail client with the
-      // letter pre-filled instead of failing silently.
-      const f = e.currentTarget;
-      const data = new FormData(f);
-      const subject = encodeURIComponent(
-        `Brief from ${data.get("name") ?? "a wanderer"}`,
-      );
-      const body = encodeURIComponent(
-        `${data.get("message") ?? ""}\n\n— ${data.get("name") ?? ""} (${data.get("email") ?? ""})`,
-      );
-      window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
-      return;
-    }
-
     setStatus("sending");
     setMessage("");
+    
     const f = e.currentTarget;
-    const data = new FormData(f);
-    data.append("access_key", accessKey);
-    data.append("from_name", "Magical Website Owl");
-    data.append("subject", `New brief from ${data.get("name") ?? "a wanderer"}`);
+    const formData = new FormData(f);
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: data,
-      });
-      const json = (await res.json()) as { success?: boolean; message?: string };
-      if (json.success) {
+      const result = await submitContactForm(formData);
+      
+      if (result.success) {
         setStatus("sent");
-        setMessage("Owl dispatched — your letter is on its way. I read every one.");
+        setMessage(result.message);
         f.reset();
       } else {
         setStatus("error");
-        setMessage(json.message ?? "The owl couldn't take off. Please try again or write to me directly.");
+        setMessage(result.message);
       }
-    } catch {
+    } catch (err) {
       setStatus("error");
       setMessage("The owl couldn't take off. Please try again or write to me directly.");
     }
