@@ -211,7 +211,7 @@ function ProjectCard({
       tabIndex={0}
       aria-label={`Open story for ${project.title}`}
       className={cn(
-        "group surface-project-card card-3d motion-project-card relative h-[450px] cursor-pointer overflow-hidden rounded-[2rem] bg-[#0a0a0a] outline outline-1 outline-white/5 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.8)]",
+        "group surface-project-card card-3d motion-project-card relative h-[450px] cursor-pointer overflow-hidden rounded-[2rem] bg-night border border-candle/[0.08] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(230,178,94,0.06)] hover:border-candle/20 hover:shadow-[0_0_50px_rgba(230,178,94,0.08),0_20px_40px_-15px_rgba(0,0,0,0.8)]",
         palette.hover,
       )}
       onClick={onOpen}
@@ -221,8 +221,8 @@ function ProjectCard({
     >
       {project.id === "jobpulse" ? (
         <div className="absolute right-5 top-5 z-20 transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105">
-          <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-white shadow-2xl backdrop-blur-md">
-            Flagship
+          <span className="rounded-full border border-candle/30 bg-candle/10 px-4 py-1.5 font-display text-[10px] font-bold uppercase tracking-[0.15em] text-candle shadow-[0_0_18px_rgba(230,178,94,0.15)] backdrop-blur-md">
+            ✦ Flagship
           </span>
         </div>
       ) : null}
@@ -238,15 +238,15 @@ function ProjectCard({
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent" />
-      <div className={cn("absolute inset-0 z-0 opacity-30 mix-blend-screen transition-opacity duration-700 group-hover:opacity-60", palette.tint)} />
+      <div className="absolute inset-0 bg-gradient-to-t from-night via-night/95 to-transparent" />
+      <div className={cn("absolute inset-0 z-0 opacity-20 mix-blend-screen transition-opacity duration-700 group-hover:opacity-40", palette.tint)} />
 
       <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]">
         <div className="absolute left-5 top-5 flex flex-wrap gap-2 transition-all duration-700 group-hover:-translate-y-4 group-hover:opacity-0 group-hover:blur-sm">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-white/10 bg-black/40 px-3 py-1 text-[10px] font-bold text-white/90 backdrop-blur-md sm:text-xs"
+              className="rounded-full border border-candle/15 bg-night/70 px-3 py-1 font-display text-[9px] font-semibold uppercase tracking-wider text-parchment/80 backdrop-blur-md sm:text-[10px]"
             >
               {tag}
             </span>
@@ -254,12 +254,12 @@ function ProjectCard({
         </div>
 
         <div className="translate-y-6 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-20">
-          <h3 className={cn("mb-3 text-3xl font-black tracking-tight text-white", palette.title)}>
+          <h3 className={cn("mb-3 font-display text-3xl font-bold tracking-tight text-parchment", palette.title)}>
             {project.title}
           </h3>
 
           <div className="pointer-events-auto mb-6 flex items-center gap-2">
-            <span className="text-sm font-bold text-white">{average.toFixed(1)}</span>
+            <span className="font-heading text-sm font-bold text-parchment">{average.toFixed(1)}</span>
             <div className="flex items-center gap-1">
               {Array.from({ length: 5 }, (_, index) => {
                 const star = index + 1;
@@ -271,7 +271,7 @@ function ProjectCard({
                     aria-label={`Rate ${project.title} ${star} star${star > 1 ? "s" : ""}`}
                     className={cn(
                       "relative z-20 text-[10px] transition-transform hover:scale-125",
-                      active ? "text-amber-400" : "text-white/20",
+                      active ? "text-candle" : "text-parchment/20",
                     )}
                     onMouseEnter={(event) => {
                       event.stopPropagation();
@@ -291,7 +291,7 @@ function ProjectCard({
                 );
               })}
             </div>
-            <span className="ml-1 text-xs text-white/40">({totalVotes})</span>
+            <span className="ml-1 font-heading text-xs text-parchment/40">({totalVotes})</span>
           </div>
         </div>
 
@@ -302,7 +302,7 @@ function ProjectCard({
               event.stopPropagation();
               onOpen();
             }}
-            className="group/btn relative flex w-full items-center justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-500 hover:border-white/30"
+            className="group/btn relative flex w-full items-center justify-between overflow-hidden rounded-2xl border border-candle/15 bg-night/80 p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_0_1px_rgba(230,178,94,0.04)_inset] backdrop-blur-xl transition-all duration-500 hover:border-candle/40 hover:shadow-[0_0_25px_rgba(230,178,94,0.1),0_10px_30px_rgba(0,0,0,0.5)]"
           >
             <div
               aria-hidden="true"
@@ -311,12 +311,12 @@ function ProjectCard({
                 palette.glow,
               )}
             />
-            <span className="relative z-10 flex items-center gap-3 text-sm font-bold tracking-wide text-white">
-              <SpellbookIcon width={16} height={16} className="text-white/50 transition-colors group-hover/btn:text-white" />
-              Read the story
+            <span className="relative z-10 flex items-center gap-3 font-display text-sm font-semibold tracking-wide text-parchment">
+              <SpellbookIcon width={16} height={16} className="text-candle/50 transition-colors group-hover/btn:text-candle" />
+              Read the Story
             </span>
-            <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-[10px] bg-white/10 transition-transform duration-500 group-hover/btn:scale-110">
-              <span aria-hidden="true" className="text-xs text-white">
+            <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-[10px] border border-candle/20 bg-candle/10 transition-all duration-500 group-hover/btn:scale-110 group-hover/btn:bg-candle/20 group-hover/btn:shadow-[0_0_12px_rgba(230,178,94,0.2)]">
+              <span aria-hidden="true" className="text-xs text-candle">
                 →
               </span>
             </div>
