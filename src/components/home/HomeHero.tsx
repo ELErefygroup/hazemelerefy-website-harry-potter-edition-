@@ -25,7 +25,7 @@ export function HomeHero() {
   return (
     <section
       aria-labelledby="home-hero-title"
-      className="relative isolate overflow-hidden pt-32 pb-20 md:pt-40 md:pb-24"
+      className="relative isolate overflow-hidden flex min-h-screen w-full items-center pt-32 pb-20 md:pt-40 md:pb-24"
     >
       {/* Background video & prioritized poster image */}
       <div className="absolute inset-0 -z-10">
@@ -60,7 +60,7 @@ export function HomeHero() {
         />
       </div>
 
-      <div className="mx-auto flex max-w-6xl flex-col items-center px-6 text-center md:px-8">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 text-center md:px-8">
         <motion.span
           initial={reduced ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
