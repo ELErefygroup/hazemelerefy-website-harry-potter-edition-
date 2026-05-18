@@ -8,6 +8,7 @@ import { useReducedMotion } from "@/lib/useReducedMotion";
 import { ProfileFrameV2 } from "@/components/portfolio/ProfileFrameV2";
 import { OwlIcon, SpellbookIcon, CrestIcon, QuillIcon } from "@/components/icons/HpIcons";
 import { ScrollDownload } from "@/components/magic/ScrollDownload";
+import { ScrollIndicator } from "@/components/magic/ScrollIndicator";
 import { site } from "@/lib/site";
 
 /**
@@ -210,6 +211,8 @@ export function PortfolioHero({
           </motion.div>
         </div>
       </div>
+
+      <ScrollIndicator targetId="gallery" />
 
       {/* Bottom edge filigree */}
       <div

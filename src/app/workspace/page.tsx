@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { WorkspaceClient } from "@/components/workspace/WorkspaceClient";
 import { ClosingCharm } from "@/components/home/ClosingCharm";
+import { ScrollIndicator } from "@/components/magic/ScrollIndicator";
 
 export const metadata: Metadata = {
   title: "Workspace",
@@ -47,10 +48,11 @@ export default function WorkspacePage() {
             </p>
           </header>
         </div>
+        <ScrollIndicator targetId="lab-grid" />
       </section>
 
       {/* Lab Grid */}
-      <section className="px-6 pb-20 md:px-8 md:pb-24">
+      <section id="lab-grid" className="px-6 pb-20 md:px-8 md:pb-24">
         <div className="mx-auto max-w-7xl">
           <WorkspaceClient />
         </div>

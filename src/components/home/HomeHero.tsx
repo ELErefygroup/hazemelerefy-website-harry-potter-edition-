@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { cn } from "@/lib/cn";
 import { SpellbookIcon, CrestIcon, QuillIcon } from "@/components/icons/HpIcons";
+import { ScrollIndicator } from "@/components/magic/ScrollIndicator";
 
 /**
  * Home hero — the very first thing a visitor sees on `/`. Mirrors the
@@ -152,6 +153,8 @@ export function HomeHero() {
           />
         </motion.div>
       </div>
+
+      <ScrollIndicator targetId="expertise" />
     </section>
   );
 }

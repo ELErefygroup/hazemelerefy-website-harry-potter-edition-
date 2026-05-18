@@ -54,6 +54,7 @@ const cards = [
 export function ExpertiseTrio() {
   return (
     <section
+      id="expertise"
       aria-labelledby="expertise-title"
       className="relative border-t border-candle/10 px-6 py-24 md:px-8 md:py-32"
     >

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { PlatformsGrid } from "@/components/services/PlatformsGrid";
 import { OwlForm } from "@/components/services/OwlForm";
+import { ScrollIndicator } from "@/components/magic/ScrollIndicator";
 import { platforms } from "@/content/platforms";
 import { services } from "@/content/services";
 
@@ -77,10 +78,12 @@ export default function ServicesPage() {
             </div>
           </div>
         </div>
+        <ScrollIndicator targetId="deliver" />
       </section>
 
       {/* Services grid (Analytics / Frontend tabs) */}
       <section
+        id="deliver"
         aria-labelledby="deliver-title"
         className="px-6 py-16 md:px-8 md:py-24"
       >
