@@ -16,12 +16,11 @@ export default function ServicesPage() {
 
   return (
     <>
-      {/* Hero */}
       <section
         aria-labelledby="services-title"
-        className="relative pt-32 pb-12 md:pt-40 md:pb-16"
+        className="relative flex min-h-screen w-full items-center pt-32 pb-12 md:pt-40 md:pb-16"
       >
-        <div className="mx-auto max-w-5xl px-6 md:px-8">
+        <div className="mx-auto w-full max-w-5xl px-6 md:px-8">
           <div className="relative overflow-hidden rounded-[32px] border border-candle/15 bg-gradient-to-br from-night/80 via-night/72 to-[#0d121d]/90 px-6 py-10 text-center shadow-[0_30px_80px_-35px_rgba(0,0,0,0.95)] backdrop-blur-md md:px-10 md:py-14">
             <div
               aria-hidden="true"
