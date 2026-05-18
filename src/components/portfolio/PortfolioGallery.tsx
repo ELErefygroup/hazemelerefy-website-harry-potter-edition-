@@ -49,9 +49,20 @@ export function PortfolioGallery() {
       className="relative overflow-visible border-t border-white/[0.05] px-6 py-24 md:px-12"
     >
       <div className="mx-auto max-w-7xl">
-        <h2 id="gallery-title" className="sr-only">
-          Portfolio projects
-        </h2>
+        <header className="mx-auto max-w-2xl text-center mb-16">
+          <p className="font-display text-[10px] font-semibold uppercase tracking-[0.5em] text-candle/80">
+            Portfolio
+          </p>
+          <h2
+            id="gallery-title"
+            className="mt-4 font-display text-3xl font-bold leading-tight text-parchment md:text-5xl"
+          >
+            Tome of{" "}
+            <span className="bg-gradient-to-br from-[#F0CB7A] via-[#E6B25E] to-[#C8853A] bg-clip-text text-transparent">
+              Works
+            </span>
+          </h2>
+        </header>
 
         <div className="relative z-10 overflow-visible w-full">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

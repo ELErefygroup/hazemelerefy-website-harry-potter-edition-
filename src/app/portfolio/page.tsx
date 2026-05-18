@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
+import { ExpertiseTrio } from "@/components/home/ExpertiseTrio";
 import { PortfolioGallery } from "@/components/portfolio/PortfolioGallery";
 import { ClosingCharm } from "@/components/home/ClosingCharm";
 
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
  * Portfolio route. Combined hero (banner + thin profile frame + name +
  * tagline + intro + stat chips + CTAs), then the gallery of project
  * cards that open into the magical book modal, then the global closing
- * charm CTA. The legacy About / Expertise sections are intentionally
- * gone — that content was duplicated into the Home page.
+ * charm CTA.
  */
 export default function PortfolioPage() {
   return (
     <>
       <PortfolioHero />
+      <ExpertiseTrio />
       <PortfolioGallery />
       <ClosingCharm />
     </>
