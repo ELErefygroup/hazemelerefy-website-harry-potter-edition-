@@ -55,7 +55,7 @@ export function PortfolioHero({
   return (
     <section
       aria-labelledby="portfolio-hero-title"
-      className="relative isolate overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28 lg:min-h-[100svh] lg:pt-44"
+      className="relative isolate overflow-hidden flex min-h-screen items-center pt-32 pb-20 md:pt-40 md:pb-28 lg:pt-24 lg:pb-20"
     >
       {/* Background banner */}
       <div className="absolute inset-0 -z-10">
