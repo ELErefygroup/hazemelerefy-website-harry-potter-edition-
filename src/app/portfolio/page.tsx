@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
-import { ExpertiseTrio } from "@/components/home/ExpertiseTrio";
+import { AboutMe } from "@/components/portfolio/AboutMe";
 import { PortfolioGallery } from "@/components/portfolio/PortfolioGallery";
 import { ClosingCharm } from "@/components/home/ClosingCharm";
 
@@ -20,7 +20,7 @@ export default function PortfolioPage() {
   return (
     <>
       <PortfolioHero />
-      <ExpertiseTrio />
+      <AboutMe />
       <PortfolioGallery />
       <ClosingCharm />
     </>
