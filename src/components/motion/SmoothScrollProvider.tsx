@@ -26,6 +26,12 @@ export function SmoothScrollProvider() {
     });
     setLenisInstance(lenis);
 
+    // Keep Lenis in sync with dynamic DOM height modifications (images, grids, list filters)
+    const resizeObserver = new ResizeObserver(() => {
+      lenis.resize();
+    });
+    resizeObserver.observe(document.body);
+
     let frame = 0;
     const raf = (time: number) => {
       lenis.raf(time);
@@ -35,6 +41,7 @@ export function SmoothScrollProvider() {
 
     return () => {
       cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
       lenis.destroy();
       setLenisInstance(null);
     };
