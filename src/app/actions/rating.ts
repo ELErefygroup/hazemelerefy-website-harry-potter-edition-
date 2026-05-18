@@ -1,9 +1,10 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
+import { headers } from "next/headers";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL || "").trim();
+const supabaseServiceKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
 
 function getSupabase() {
   if (!supabaseUrl || !supabaseServiceKey) return null;
@@ -13,10 +14,42 @@ function getSupabase() {
 }
 
 /**
- * Submit or update a rating for a project.
- * Uses a visitor_id (fingerprint from the client) to allow one vote per visitor per project.
+ * Retrieve the client's actual IP address securely on the server.
  */
-export async function submitRating(projectKey: string, score: number, visitorId: string) {
+async function getClientIp(): Promise<string> {
+  try {
+    const headerList = await headers();
+    const rawIp = headerList.get("x-forwarded-for")?.split(",")[0] || headerList.get("x-real-ip") || "127.0.0.1";
+    return rawIp.trim();
+  } catch {
+    return "127.0.0.1";
+  }
+}
+
+/**
+ * Retrieve visitor geolocation hints from Vercel's Edge Network headers.
+ */
+async function getGeoDetails(): Promise<string> {
+  try {
+    const headerList = await headers();
+    const city = headerList.get("x-vercel-ip-city") || "";
+    const country = headerList.get("x-vercel-ip-country") || "";
+    if (city && country) {
+      return `${city}, ${country}`;
+    } else if (country) {
+      return country;
+    }
+    return "Unknown Realm";
+  } catch {
+    return "Unknown Realm";
+  }
+}
+
+/**
+ * Submit or update a rating for a project.
+ * Uses a server-side IP address to guarantee 1 unique vote per person/device.
+ */
+export async function submitRating(projectKey: string, score: number, clientVisitorId: string) {
   const supabase = getSupabase();
   if (!supabase) {
     return { success: false, message: "Database not configured." };
@@ -27,11 +60,17 @@ export async function submitRating(projectKey: string, score: number, visitorId:
   }
 
   try {
+    const ip = await getClientIp();
+    const geo = await getGeoDetails();
+    const databaseVisitorId = `ip:${ip}`;
+
+    console.log(`[RATING SUBMIT] Project: ${projectKey}, Score: ${score}, IP: ${ip}, Location: ${geo}, BrowserID: ${clientVisitorId}`);
+
     // Upsert: insert or update on conflict (project_key, visitor_id)
     const { error } = await supabase
       .from("project_ratings")
       .upsert(
-        { project_key: projectKey, score, visitor_id: visitorId },
+        { project_key: projectKey, score, visitor_id: databaseVisitorId },
         { onConflict: "project_key,visitor_id" }
       );
 
@@ -85,6 +124,35 @@ export async function fetchAllRatings(): Promise<Record<string, { totalVotes: nu
     }
     return result;
   } catch {
+    return {};
+  }
+}
+
+/**
+ * Fetch all ratings previously submitted by this visitor (based on server IP).
+ */
+export async function fetchVisitorRatings(): Promise<Record<string, number>> {
+  const supabase = getSupabase();
+  if (!supabase) return {};
+
+  try {
+    const ip = await getClientIp();
+    const databaseVisitorId = `ip:${ip}`;
+
+    const { data, error } = await supabase
+      .from("project_ratings")
+      .select("project_key, score")
+      .eq("visitor_id", databaseVisitorId);
+
+    if (error || !data) return {};
+
+    const result: Record<string, number> = {};
+    for (const row of data) {
+      result[row.project_key] = row.score;
+    }
+    return result;
+  } catch (err) {
+    console.error("Error fetching visitor ratings:", err);
     return {};
   }
 }

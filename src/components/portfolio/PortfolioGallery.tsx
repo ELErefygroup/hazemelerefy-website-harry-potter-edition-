@@ -9,7 +9,7 @@ import {
   type Stage2PortfolioProject,
 } from "@/content/portfolioStage2";
 import { cn } from "@/lib/cn";
-import { submitRating, fetchAllRatings } from "@/app/actions/rating";
+import { submitRating, fetchAllRatings, fetchVisitorRatings } from "@/app/actions/rating";
 
 /** Generate or retrieve a persistent visitor ID for rating uniqueness */
 function getVisitorId(): string {
@@ -25,6 +25,7 @@ function getVisitorId(): string {
 export function PortfolioGallery() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [ratingsMap, setRatingsMap] = useState<Record<string, { totalVotes: number; average: number }>>({});
+  const [visitorVotes, setVisitorVotes] = useState<Record<string, number>>({});
 
   // Fetch live ratings from the database on mount
   useEffect(() => {
@@ -33,13 +34,25 @@ export function PortfolioGallery() {
         setRatingsMap(data);
       }
     });
+
+    fetchVisitorRatings().then((votes) => {
+      if (votes && Object.keys(votes).length > 0) {
+        setVisitorVotes(votes);
+      }
+    });
   }, []);
 
-  function handleRatingUpdate(projectKey: string, totalVotes: number, average: number) {
+  function handleRatingUpdate(projectKey: string, totalVotes: number, average: number, newUserVote?: number) {
     setRatingsMap((prev) => ({
       ...prev,
       [projectKey]: { totalVotes, average },
     }));
+    if (newUserVote !== undefined) {
+      setVisitorVotes((prev) => ({
+        ...prev,
+        [projectKey]: newUserVote,
+      }));
+    }
   }
 
   return (
@@ -72,6 +85,7 @@ export function PortfolioGallery() {
                 project={project}
                 index={i}
                 liveRating={ratingsMap[project.ratingKey]}
+                userVote={visitorVotes[project.ratingKey] || 0}
                 onOpen={() => setActiveId(project.id)}
                 onRatingUpdate={handleRatingUpdate}
               />
@@ -94,17 +108,25 @@ function ProjectCard({
   project,
   index,
   liveRating,
+  userVote,
   onOpen,
   onRatingUpdate,
 }: {
   project: Stage2PortfolioProject;
   index: number;
   liveRating?: { totalVotes: number; average: number };
+  userVote: number;
   onOpen: () => void;
-  onRatingUpdate: (projectKey: string, totalVotes: number, average: number) => void;
+  onRatingUpdate: (projectKey: string, totalVotes: number, average: number, newUserVote?: number) => void;
 }) {
   const [score, setScore] = useState(0);
   const [hoverScore, setHoverScore] = useState(0);
+
+  // Sync state when user's personal vote completes loading from server IP
+  useEffect(() => {
+    setScore(userVote);
+    setHoverScore(userVote);
+  }, [userVote]);
 
   // Use live data from database if available, otherwise fall back to static default
   const totalVotes = liveRating?.totalVotes ?? project.rating.totalVotes;
@@ -192,7 +214,7 @@ function ProjectCard({
     const visitorId = getVisitorId();
     const result = await submitRating(project.ratingKey, nextScore, visitorId);
     if (result.success && result.totalVotes !== undefined && result.average !== undefined) {
-      onRatingUpdate(project.ratingKey, result.totalVotes, result.average);
+      onRatingUpdate(project.ratingKey, result.totalVotes, result.average, nextScore);
     }
   }
 
