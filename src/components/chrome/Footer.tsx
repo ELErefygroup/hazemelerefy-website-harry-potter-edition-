@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Logomark } from "./Logomark";
 import { footerLinks } from "@/content/nav";
