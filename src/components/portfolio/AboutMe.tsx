@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { BriefcaseIcon, CodeIcon, GraduationCapIcon } from "lucide-react";
+import { BriefcaseIcon, CodeIcon, Palette as PaletteIcon } from "lucide-react";
 
 export function AboutMe() {
   return (
@@ -126,21 +126,20 @@ export function AboutMe() {
             {/* EX 2 */}
             <div className="relative flex items-start">
               <div className="absolute -left-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-candle/60 bg-[#0B0B0F] text-xs text-candle/80 shadow-[0_0_15px_rgba(230,178,94,0.2)] transition-transform group-hover:scale-110">
-                <CodeIcon size={16} />
+                <PaletteIcon size={16} />
               </div>
               <div className="ml-10 w-full">
                 <div className="mb-3 font-display text-[10px] font-black uppercase tracking-[0.2em] text-parchment/30">
-                  2022 - 2023
+                  2022 - 2024
                 </div>
                 <h5 className="mb-1 font-display text-lg font-bold text-parchment transition-colors group-hover:text-candle/80">
-                  Front-End Dev
+                  Graphic Designer
                 </h5>
                 <div className="mb-3 font-heading text-xs font-bold text-candle/80">
-                  Udacity Nano Degree
+                  Freelance & Branding Academy
                 </div>
                 <p className="max-w-md font-heading text-xs leading-relaxed text-parchment/60">
-                  Mastered the core Web stack (HTML5, CSS3, JS) to build
-                  responsive, API-integrated web apps. (GPA: 4)
+                  Designed premium digital assets, UI layouts, and brand identities with a robust focus on visual composition and aesthetics.
                 </p>
               </div>
             </div>
@@ -148,21 +147,20 @@ export function AboutMe() {
             {/* EX 3 */}
             <div className="relative flex items-start">
               <div className="absolute -left-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-candle/40 bg-[#0B0B0F] text-xs text-candle/60 shadow-[0_0_15px_rgba(230,178,94,0.1)] transition-transform group-hover:scale-110">
-                <GraduationCapIcon size={16} />
+                <CodeIcon size={16} />
               </div>
               <div className="ml-10 w-full">
                 <div className="mb-3 font-display text-[10px] font-black uppercase tracking-[0.2em] text-parchment/30">
-                  2020 - 2024
+                  2020 - 2021
                 </div>
                 <h5 className="mb-1 font-display text-lg font-bold text-parchment transition-colors group-hover:text-candle/60">
-                  Bachelor of Laws
+                  Front-End Dev
                 </h5>
                 <div className="mb-3 font-heading text-xs font-bold text-candle/60">
-                  Port Said University
+                  Udacity Nano Degree
                 </div>
                 <p className="max-w-md font-heading text-xs leading-relaxed text-parchment/60">
-                  Developed critical thinking, analytical reasoning, and complex
-                  logic patterns through Commercial and Corporate Law.
+                  Mastered the core Web stack (HTML5, CSS3, JS) to build responsive, API-integrated web apps. (GPA: 4)
                 </p>
               </div>
             </div>
