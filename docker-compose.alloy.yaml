@@ -1,14 +1,8 @@
+# Alloy preview for MCIT AI (validation stack lives outside this repo path).
+# MCIT AI serves on host port 8502; a local proxy on 3000 forwards Alloy's
+# reserved preview path to that service so frontendPort stays 3000.
 services:
-  web:
-    image: node:22-bookworm
-    working_dir: /workspace
+  mcit-preview-note:
+    image: alpine:3.20
     network_mode: host
-    volumes:
-      - .:/workspace
-    environment:
-      IS_ALLOY: ${IS_ALLOY:-false}
-      NEXT_TELEMETRY_DISABLED: "1"
-      NEXT_PUBLIC_WEB3FORMS_KEY: ${NEXT_PUBLIC_WEB3FORMS_KEY:-}
-      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-}
-      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
-    command: bash -lc "COREPACK_ENABLE_DOWNLOAD_PROMPT=0 corepack enable && corepack prepare pnpm@10 --activate && CI=true pnpm install --frozen-lockfile && pnpm dev --hostname 0.0.0.0 --port 3000"
+    command: ["sh", "-c", "echo 'MCIT AI is expected on :8502 (proxied to Alloy via :3000).' && sleep infinity"]
